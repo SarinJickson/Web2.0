@@ -9,6 +9,13 @@ app.use(bodyParser.json());
   var email = req.body.email;
   var amount = req.body.amount;
 
+  if(amount <= 1){
+    return_info = {};
+    return_info.error = true;
+    return_info.message = "The amount should be greater than 1";
+    return res.send(return_info);
+  }
+
   res.send({"email" : email, "amount" : amount});
 });
 
