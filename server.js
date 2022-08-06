@@ -1,11 +1,12 @@
 const xpress = require('express');
 const app = xpress();
 const bodyParser = require('body-parser');
+const {save_user_information} = require('./models/server_db');
 
 // Handling the parsing
 app.use(bodyParser.json());
 
-  app.post('/',function(req,res){
+  app.post('/', async (req,res) => {
   var email = req.body.email;
   var amount = req.body.amount;
 
@@ -15,10 +16,10 @@ app.use(bodyParser.json());
     return_info.message = "The amount should be greater than 1";
     return res.send(return_info);
   }
-
-  res.send({"email" : email, "amount" : amount});
+  var result = await save_user_information({"amount" : amount, "email" : email});
+  res.send(result);
 });
 
-app.listen(3000,function(){
+app.listen(3000,()=>{
   console.log("server running on port 3000");
 });
