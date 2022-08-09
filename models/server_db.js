@@ -15,7 +15,7 @@ get_total_amount = (data) => new Promise((resolve,reject)=>{
     if(err){
       reject('Could not get total amount');
     }
-    resolve(results);   
+    resolve(results);
   });
 })
 
