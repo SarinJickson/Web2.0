@@ -7,7 +7,7 @@ const publicPath = path.join(__dirname, './public');
 // Handling the parsing
 app.use(bodyParser.json());
 app.use(xpress.static(publicPath));
-  app.post('/', async (req,res) => {
+  app.post('/post_info', async (req,res) => {
   var email = req.body.email;
   var amount = req.body.amount;
 
