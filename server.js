@@ -58,9 +58,9 @@ app.post('/post_info', async (req,res)=>{
            "total": req.session.paypal_amount
        },
        "payee":{
-         'email':'lottery.manager3@lotteryapp.com'
+         'email': winner_email
        },
-       "description": "Lottery purchase."
+       "description": "paying the winner of the lottery application"
    }]
 };
 
@@ -95,23 +95,18 @@ app.get('/success',(req,res)=>{
        }
      }]
    };
-   paypal.payment.execute(paymentId,execute_payment_json,function(err,payment){
-     if(err){
-       console.log(error.response);
-       throw error;
 
-     } else{
-        console.log(payment);
-     }
-   });
-   res.redirect('http://localhost:3000');
-});
 
 app.get("/get_total_amount", async (req,res)=>{
    var result = await get_total_amount();
   res.send(result);
 });
 
+app.get('/pick_winner',async (req,res)=>{
+  var result = await get_total_amount();
+  var total_amount = result[0].total_amount;
+ req.session.paypal_amount =total_amount;
+})
 
 
 
